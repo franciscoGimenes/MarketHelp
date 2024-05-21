@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,8 +12,18 @@ export default function Bem_Vindo() {
 
   const navigation=useNavigation()
 
+
   function mudarPag(){
     navigation.navigate('compras')
+  } 
+
+  function mudarPagComprar(){
+    setEscolha("novaCompra")
+    mudarPag()
+  }
+  function mudarPagAnterior(){
+    setEscolha("verCompra")
+    mudarPag()
   }
 
   return (
@@ -29,13 +39,13 @@ export default function Bem_Vindo() {
         </View>
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.BotaoComprar} onPress={setEscolha("novaCompra")}>
+        <TouchableOpacity style={styles.BotaoComprar} onPress={mudarPagComprar} >
           <View style={styles.conteudoBotoes}>
             <Text style={styles.comecarCompra}>Começar compra</Text>
             <Icon name="shopping-cart" size={30} color="#545454" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.BotaoAnterior} onPress={setEscolha("verCompra")}>
+        <TouchableOpacity style={styles.BotaoAnterior} onPress={mudarPagAnterior}>
           <View style={styles.conteudoBotoes}>
             <Text style={styles.compraAnterior}>Ver compra anterior</Text>
             <Icon name="arrow-left" size={30} color="#fff" />
@@ -61,7 +71,7 @@ const styles = StyleSheet.create({
   barbudo: {
     height: 295,
     width: '90%',
-    zIndex: -1,
+    zIndex: 0,
     position: 'absolute',
     top: 60,
   },
